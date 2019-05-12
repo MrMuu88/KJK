@@ -1,6 +1,6 @@
-﻿namespace KJK.App.ViewModels {
+﻿namespace KJK.App.ViewModels.AdventureVMs {
 
-    public class MainPageVM:ViewModelBase {
+    public class MapVM {
         #region Fields,Properties,Events ##############################################################
 
 
@@ -15,7 +15,7 @@
 
         #region Ctors #################################################################################
 
-        public MainPageVM() { }
+        public MapVM() { }
 
         #endregion
     }//clss

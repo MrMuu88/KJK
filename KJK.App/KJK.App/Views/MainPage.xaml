@@ -2,13 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:KJK.App.Views"
-             x:Class="KJK.App.Views.MainPage">
+             xmlns:vm="clr-namespace:KJK.App.ViewModels"
+             x:Class="KJK.App.Views.MainPage"
+             >
+    <ContentPage.BindingContext>
+        <vm:MainVM x:Name="VM"/>
+    </ContentPage.BindingContext>
 
     <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <Image Source="Logo.png"/>
+        <Button Text="New Adventure" Command="{Binding cmdNewAdventure}"/>
+        <Button Text="Continue" Command="{Binding cmdContinue}"/>
+        <Button Text="Settings" Command="{Binding cmdSettings}"/>
     </StackLayout>
 
 </ContentPage>

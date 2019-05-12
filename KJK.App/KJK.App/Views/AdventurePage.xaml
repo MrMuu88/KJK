@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:KJK.App.ViewModels"
+             xmlns:pages="clr-namespace:KJK.App.Views.AdventurePages"
+             xmlns:prismbehav="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             x:Class="KJK.App.Views.AdventurePage">
+    <MasterDetailPage.BindingContext>
+        <vm:AdventureVM/>
+    </MasterDetailPage.BindingContext>
+    <MasterDetailPage.Master>
+        <ContentPage Title="KJK adventure">
+            <StackLayout>
+                <Label FontSize="Large" Text="Character">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding cmdDisplayDetail}" CommandParameter="Character"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label FontSize="Large" Text="Inventory">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding cmdDisplayDetail}" CommandParameter="Inventory"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label FontSize="Large" Text="Reading">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding cmdDisplayDetail}" CommandParameter="Reading"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label FontSize="Large" Text="Map">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding cmdDisplayDetail}" CommandParameter="Map"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label FontSize="Large" Text="Rest">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding cmdDisplayDetail}" CommandParameter="Rest"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <pages:ReadingPage/>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>
