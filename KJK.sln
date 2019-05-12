@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KJK.DataModel", "DataModel\KJK.DataModel.csproj", "{0154E7CB-78D4-4C79-902A-623C480108FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KJK.DataAccess", "DataAccess\KJK.DataAccess.csproj", "{A4378A8E-4020-4987-88EE-05F13C834DF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KJK.Serivces", "DataAccess\KJK.Serivces.csproj", "{A4378A8E-4020-4987-88EE-05F13C834DF9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KJK.App.Android", "KJK.App\KJK.App.Android\KJK.App.Android.csproj", "{4EFE0FFC-634D-4A55-A714-F8686A3639D1}"
 EndProject
