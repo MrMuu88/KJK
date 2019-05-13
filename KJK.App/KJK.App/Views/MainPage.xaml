@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:KJK.App.Views"
              xmlns:vm="clr-namespace:KJK.App.ViewModels"
              x:Class="KJK.App.Views.MainPage"
+             NavigationPage.HasNavigationBar="False"
              >
     <ContentPage.BindingContext>
         <vm:MainVM x:Name="VM"/>

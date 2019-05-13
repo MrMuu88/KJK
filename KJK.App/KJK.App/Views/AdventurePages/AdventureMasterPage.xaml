@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:help="clr-namespace:KJK.App.Helpers"
+             xmlns:Pages="clr-namespace:KJK.App.Views.AdventurePages"
+             x:Class="KJK.App.Views.AdventurePages.AdventureMasterPage"
+             >
+    <StackLayout>
+        <ListView x:Name="lstNavigation" x:FieldModifier="public">
+            <ListView.ItemsSource>
+                <x:Array Type="{x:Type help:MasterDetailNavigationItem}">
+                    <help:MasterDetailNavigationItem Title="Reading"        TargetType="{x:Type Pages:ReadingPage}"/>
+                    <help:MasterDetailNavigationItem Title="CharacterSheet" TargetType="{x:Type Pages:CharacterPage}"/>
+                    <help:MasterDetailNavigationItem Title="Inventory"      TargetType="{x:Type Pages:InventoryPage}"/>
+                    <help:MasterDetailNavigationItem Title="Map"            TargetType="{x:Type Pages:MapPage}"/>
+                    <help:MasterDetailNavigationItem Title="Rest"           TargetType="{x:Type Pages:RestPage}"/>
+                </x:Array>
+            </ListView.ItemsSource>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label  Text="{Binding Title}"
+                            FontSize="Large" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

@@ -4,40 +4,14 @@
              xmlns:vm="clr-namespace:KJK.App.ViewModels"
              xmlns:pages="clr-namespace:KJK.App.Views.AdventurePages"
              xmlns:prismbehav="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             x:Class="KJK.App.Views.AdventurePage">
+             x:Class="KJK.App.Views.AdventurePage"
+             NavigationPage.HasNavigationBar="False"
+             >
     <MasterDetailPage.BindingContext>
         <vm:AdventureVM/>
     </MasterDetailPage.BindingContext>
     <MasterDetailPage.Master>
-        <ContentPage Title="KJK adventure">
-            <StackLayout>
-                <Label FontSize="Large" Text="Character">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding cmdDisplayDetail}" CommandParameter="Character"/>
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label FontSize="Large" Text="Inventory">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding cmdDisplayDetail}" CommandParameter="Inventory"/>
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label FontSize="Large" Text="Reading">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding cmdDisplayDetail}" CommandParameter="Reading"/>
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label FontSize="Large" Text="Map">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding cmdDisplayDetail}" CommandParameter="Map"/>
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label FontSize="Large" Text="Rest">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding cmdDisplayDetail}" CommandParameter="Rest"/>
-                    </Label.GestureRecognizers>
-                </Label>
-            </StackLayout>
-        </ContentPage>
+        <pages:AdventureMasterPage Title="AdventureMaster" x:Name="MasterView"/>
     </MasterDetailPage.Master>
     <MasterDetailPage.Detail>
         <pages:ReadingPage/>

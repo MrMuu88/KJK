@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:KJK.App.ViewModels"
-             x:Class="KJK.App.Views.SettingsPage">
+             x:Class="KJK.App.Views.SettingsPage"
+             NavigationPage.HasNavigationBar="False"
+             >
     <ContentPage.BindingContext>
         <vm:SettingsVM x:Name="VM"/>
     </ContentPage.BindingContext>
