@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -11,19 +11,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controls\**" />
+    <Compile Remove="Converters\**" />
+    <EmbeddedResource Remove="Controls\**" />
+    <EmbeddedResource Remove="Converters\**" />
+    <None Remove="Controls\**" />
+    <None Remove="Converters\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controls\" />
-    <Folder Include="Converters\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\DataAccess\KJK.Serivces.csproj" />
-    <ProjectReference Include="..\..\DataModel\KJK.DataModel.csproj" />
+    <ProjectReference Include="..\..\KJK.DataModel\KJK.DataModel.csproj" />
+    <ProjectReference Include="..\..\KJK.Services\KJK.Serivces.csproj" />
   </ItemGroup>
 
   <ItemGroup>
