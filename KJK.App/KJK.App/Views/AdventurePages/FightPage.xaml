@@ -2,13 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:avm="clr-namespace:KJK.App.ViewModels.AdventureVMs"
-             x:Class="KJK.App.Views.AdventurePages.MapPage">
+             x:Class="KJK.App.Views.AdventurePages.FightPage"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.BindingContext>
-        <avm:MapVM x:Name="VM"/>
+        <avm:FightVM x:Name="VM"/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="MapPage coming soon..."
+            <Label Text="FightPage coming soon..."
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>

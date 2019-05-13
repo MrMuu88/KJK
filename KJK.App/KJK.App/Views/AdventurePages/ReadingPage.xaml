@@ -1,12 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:avm="clr-namespace:KJK.App.ViewModels.AdventureVMs"
              x:Class="KJK.App.Views.AdventurePages.ReadingPage">
+    <ContentPage.BindingContext>
+        <avm:ReadingVM x:Name="VM"/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
             <Label Text="ReadingPage Coming soon..."
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Button Text="Fight" Command="{Binding cmdNavToFigth}"/>
+            <Button Text="Test" Command="{Binding cmdNavToTest}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
