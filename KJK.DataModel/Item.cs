@@ -1,4 +1,4 @@
-﻿namespace KJK.DataModel {
+﻿namespace KJK.Model {
     public class Item {
 		
 		public int ID { get; set; }

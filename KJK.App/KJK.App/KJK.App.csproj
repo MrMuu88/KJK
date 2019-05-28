@@ -26,8 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\KJK.DataModel\KJK.DataModel.csproj" />
-    <ProjectReference Include="..\..\KJK.Services\KJK.Serivces.csproj" />
+    <ProjectReference Include="..\..\KJK.DataModel\KJK.Model.csproj" />
   </ItemGroup>
 
   <ItemGroup>

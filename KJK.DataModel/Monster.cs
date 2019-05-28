@@ -1,4 +1,4 @@
-﻿namespace KJK.DataModel {
+﻿namespace KJK.Model {
 
     public class Monster {
 		
