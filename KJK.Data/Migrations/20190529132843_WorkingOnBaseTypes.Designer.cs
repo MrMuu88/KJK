@@ -3,14 +3,16 @@ using System;
 using KJK.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KJK.Data.Migrations
 {
     [DbContext(typeof(KJKDBContext))]
-    partial class KJKDBContextModelSnapshot : ModelSnapshot
+    [Migration("20190529132843_WorkingOnBaseTypes")]
+    partial class WorkingOnBaseTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
