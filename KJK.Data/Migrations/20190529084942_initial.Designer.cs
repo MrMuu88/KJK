@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KJK.Data.Migrations
 {
     [DbContext(typeof(KJKDBContext))]
-    [Migration("20190528100221_initial")]
+    [Migration("20190529084942_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

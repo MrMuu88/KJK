@@ -11,9 +11,9 @@ namespace KJK.Data {
 		DbSet<Monster> Monsters { get; set; }
 
 		public KJKDBContext() {
-			constr = @"Data Source=D:\Projects\KJK\KJK.db";
+			constr = @"Data Source=D:\Projects\KJK\Adventure.db";
 		}
-		public KJKDBContext(string connectionString = @"Data Source=D:\Projects\KJK\KJK.db") {
+		public KJKDBContext(string connectionString = @"Data Source=D:\Projects\KJK\Adventure.db") {
 			constr = connectionString;
 		}
 

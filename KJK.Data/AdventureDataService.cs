@@ -2,7 +2,7 @@
 
 namespace KJK.Data {
 
-	public class DbDataService :IDataService{
+	public class AdventureDataService :IDataService{
 
 		#region Methods, Tasks, commands ##############################################################
 
@@ -45,7 +45,7 @@ namespace KJK.Data {
 		
 		#region Ctors #################################################################################
 
-		public DbDataService() { }
+		public AdventureDataService() { }
 
 
 		#endregion
