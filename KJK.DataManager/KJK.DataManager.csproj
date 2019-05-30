@@ -166,6 +166,7 @@
     </ApplicationDefinition>
     <Compile Include="Helpers\LookupItem.cs" />
     <Compile Include="ViewModels\MonsterTabVM.cs" />
+    <Compile Include="ViewModels\ModelWrappers\MonsterWrapper.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\MonsterTab.xaml.cs">
       <DependentUpon>MonsterTab.xaml</DependentUpon>
@@ -225,6 +226,10 @@
     <ProjectReference Include="..\KJK.Data\KJK.Data.csproj">
       <Project>{06db7362-657c-4690-9993-7a4f7555280f}</Project>
       <Name>KJK.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KJK.Model\KJK.Model.csproj">
+      <Project>{0154E7CB-78D4-4C79-902A-623C480108FF}</Project>
+      <Name>KJK.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

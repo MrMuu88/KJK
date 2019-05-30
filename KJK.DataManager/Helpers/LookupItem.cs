@@ -11,7 +11,7 @@ namespace KJK.DataManager.Helpers {
 
 		public string DisplayMember {
 			get { return _displayMember+((Modified)?"*":""); }
-			set { _displayMember = value; }
+			private set { _displayMember = value; }
 		}
 
 
@@ -26,7 +26,10 @@ namespace KJK.DataManager.Helpers {
 
 		#region Ctors #################################################################################
 
-		public LookupItem() { }
+		public LookupItem(int id,string displayMember) {
+			ID = id;
+			DisplayMember = displayMember;
+		}
 
 		#endregion
 	}//clss
