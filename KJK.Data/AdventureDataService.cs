@@ -25,8 +25,10 @@ namespace KJK.Data {
 		}
 
 		public void Remove<T>(T item) where T : class {
+			if(!(DB.Entry(item).State == EntityState.Detached)) {
 				DB.Remove(item);
 				DB.SaveChanges();
+			}
 		}
 			
 

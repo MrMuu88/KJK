@@ -20,9 +20,8 @@ namespace KJK.DataManager.ViewModels.ModelWrappers {
 
 		public int ID { get; private set; }
 
-		public string DisplayMember { get => $"{ID} {Name} {((Modified)?"*":"")}"; }
+		public string DisplayMember { get => $"{Name} {((Modified)?"*":"")}"; }
 
-		public bool ShouldRemove { get; set; } = false;
 
 		public bool Modified {
 			get => modified; 
@@ -127,16 +126,17 @@ namespace KJK.DataManager.ViewModels.ModelWrappers {
 
 		public override void Reset() {
 			ID = Model.ID;
-			name = Model.Name;
-			description = Model.Description;
-			health = Model.Health;
-			mana = Model.Mana;
-			stamina = Model.Stamina;
-			strength = Model.Strength;
-			dexterity = Model.Dexterity;
-			intelect = Model.Intelect;
-			wisdom = Model.Wisdom;
-			charisma = Model.Charisma;
+			Name = Model.Name;
+			Description = Model.Description;
+			Health = Model.Health;
+			Mana = Model.Mana;
+			Stamina = Model.Stamina;
+			Strength = Model.Strength;
+			Dexterity = Model.Dexterity;
+			Intelect = Model.Intelect;
+			Wisdom = Model.Wisdom;
+			Charisma = Model.Charisma;
+
 			Modified = false;
 		}
 
