@@ -25,6 +25,7 @@ namespace KJK.Data {
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
 			//Fluent API modifications
 			base.OnModelCreating(modelBuilder);
+
 		}
 	}
 

@@ -6,6 +6,11 @@
     <ApplicationIcon />
     <StartupObject />
   </PropertyGroup>
+ 
+  <ItemGroup>
+    <Compile Remove="Migrations\20190530113858_addedNavPropertyBetweenMosterParagraph.cs" />
+    <Compile Remove="Migrations\20190530113858_addedNavPropertyBetweenMosterParagraph.Designer.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
