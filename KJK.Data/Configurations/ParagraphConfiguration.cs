@@ -1,5 +1,6 @@
 ﻿using KJK.Data.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace KJK.Data.Configurations
@@ -10,8 +11,8 @@ namespace KJK.Data.Configurations
 		{
 			base.Configure(builder);
 			builder.Property(p => p.Choices).HasConversion(
-				choicesList => Newtonsoft.Json.JsonConvert.SerializeObject(choicesList),
-				choicesJson => Newtonsoft.Json.JsonConvert.DeserializeObject<List<Choice>>(choicesJson)
+				choicesList => JsonConvert.SerializeObject(choicesList),
+				choicesJson => JsonConvert.DeserializeObject<List<Choice>>(choicesJson)
 			);
 		}
 	}
