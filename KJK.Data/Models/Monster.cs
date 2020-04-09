@@ -4,6 +4,6 @@
 		
 		public string Description { get; set; }
 		
-		Paragraph Paragraph { get; set; }
+		public Paragraph Paragraph { get; set; }
 	}
 }

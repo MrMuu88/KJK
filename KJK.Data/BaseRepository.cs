@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace KJK.Data {
 
 	public class BaseRepository<T> :IRepository<T> where T:BaseModel{
-		internal KJKDBContext DbContext { get; set; }
+		internal KJKDbContext DbContext { get; set; }
 
 		public async Task Create(T item) => await DbContext.Set<T>().AddAsync(item);
 
@@ -75,7 +75,7 @@ namespace KJK.Data {
 		}
 
 
-		public BaseRepository(KJKDBContext dbContext) {
+		public BaseRepository(KJKDbContext dbContext) {
 			DbContext = dbContext;
 		}
 	}//clss
