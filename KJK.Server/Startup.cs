@@ -1,3 +1,5 @@
+using KJK.Data;
+using KJK.Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +28,11 @@ namespace KJK.Server
 			{
 				configuration.RootPath = "ClientApp/dist";
 			});
+
+			services.AddScoped<KJKDbContext>();
+			services.AddScoped<IRepository<Paragraph>, BaseRepository<Paragraph>>();
+			services.AddScoped<IRepository<Item>, BaseRepository<Item>>();
+			services.AddScoped<IRepository<Monster>, BaseRepository<Monster>>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
