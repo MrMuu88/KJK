@@ -21,8 +21,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\KJK.Model\KJK.Model.csproj" />
-  </ItemGroup>
-
 </Project>
