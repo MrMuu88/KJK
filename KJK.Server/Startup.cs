@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,7 +30,7 @@ namespace KJK.Server
 				configuration.RootPath = "ClientApp/dist";
 			});
 
-			services.AddScoped<KJKDbContext>();
+			services.AddDbContext<KJKDbContext>(options=> options.UseSqlServer(Configuration.GetConnectionString("KJKDB")));
 			services.AddScoped<IRepository<Paragraph>, BaseRepository<Paragraph>>();
 			services.AddScoped<IRepository<Item>, BaseRepository<Item>>();
 			services.AddScoped<IRepository<Monster>, BaseRepository<Monster>>();
