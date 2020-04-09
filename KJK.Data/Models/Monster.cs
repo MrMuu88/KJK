@@ -1,4 +1,4 @@
-﻿namespace KJK.Model {
+﻿namespace KJK.Data.Models {
 
 	public class Monster:CharacterBase {
 		

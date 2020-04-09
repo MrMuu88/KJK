@@ -1,4 +1,4 @@
-﻿namespace KJK.Model {
+﻿namespace KJK.Data.Models {
 	public class Choice{
 		public int ID { get; set; }
 		public string Text { get; set; }

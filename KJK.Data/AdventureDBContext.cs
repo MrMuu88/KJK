@@ -1,4 +1,4 @@
-﻿using KJK.Model;
+﻿using KJK.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace KJK.Data {

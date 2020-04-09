@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace KJK.Model {
+namespace KJK.Data.Models {
 	public class Paragraph{
 
 		public int ID { get; set; }

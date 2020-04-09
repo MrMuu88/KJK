@@ -1,4 +1,4 @@
-﻿namespace KJK.Model {
+﻿namespace KJK.Data.Models {
 	public class Item {
 
 		public int ID { get; set; }
@@ -15,6 +15,4 @@
 		
 	}
 
-	public enum ItemSlot {None,Head,Chest,Legs,Boots,MainHand,Offhand,TwoHand,Trinket}
-	public enum ItemType {Junk,Armor,Weapon,Consumable,Quest}
 }

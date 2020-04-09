@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace KJK.Model {
+namespace KJK.Data.Models {
 
 	public class Player {
 		#region Fields,Properties,Events ##############################################################
@@ -27,6 +27,5 @@ namespace KJK.Model {
 		#endregion
 	}//clss
 
-
-	public enum CharacterClass {Warrior,Mage,Rouge}
+	
 }//ns
