@@ -13,6 +13,8 @@ namespace KJK.Server.ViewModels
 		public ItemType Type {get=>Model.Type; set=>Model.Type=value;}
 		public float Weight {get=>Model.Weight; set=>Model.Weight=value;}
 
+		public ItemViewModel() : this(new Item()) { }
+
 		public ItemViewModel(Item model) : base(model) { }
 	}
 }

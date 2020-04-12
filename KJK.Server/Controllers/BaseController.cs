@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using KJK.Data;
 using KJK.Data.Models;
+using KJK.Server.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +14,12 @@ namespace KJK.Server.Controllers
 {
 	public abstract class BaseController<T> : ControllerBase where T:BaseModel
 	{
+		protected static Dictionary<Type, Type> VMStrategy = new Dictionary<Type, Type>() {
+			{ typeof(Paragraph),typeof(ParagraphViewModel)},
+			{ typeof(Monster),typeof(MonsterViewModel)},
+			{ typeof(Item),typeof(ItemViewModel)}
+		};
+
 		internal IRepository<T> Repo { get; set; }
 
 		[HttpGet]
@@ -17,12 +27,16 @@ namespace KJK.Server.Controllers
 		{
 			try
 			{
+				
 				var items = await Repo.GetAll();
-				return Ok(items);
+				return Ok(
+					items.Select(i => Activator.CreateInstance(VMStrategy[typeof(T)], i))
+					.ToList()
+				);
 			}
 			catch (Exception ex)
 			{
-				return StatusCode(StatusCodes.Status500InternalServerError,ex);
+				return StatusCode(StatusCodes.Status500InternalServerError, new { Error = ex.GetType().Name, Message = ex.Message });
 			}
 		}
 		
@@ -33,47 +47,62 @@ namespace KJK.Server.Controllers
 			{
 				var item = await Repo.GetById(id);
 				if (item != null)
-					return Ok(item);
+					return Ok(
+						Activator.CreateInstance(VMStrategy[typeof(T)],item)
+					);
 				else
 					return NotFound();
 				
 			}
 			catch (Exception ex)
 			{
-				return StatusCode(StatusCodes.Status500InternalServerError,ex);
+				return StatusCode(StatusCodes.Status500InternalServerError, new { Error = ex.GetType().Name, Message = ex.Message });
 			}
 		}
 
 
 		[HttpPost]
-		public virtual async Task<ActionResult<T>> Post([FromBody]T model)
+		public virtual async Task<ActionResult<T>> Post()
 		{
 			try
 			{
-				await Repo.Create(model);
+				var rawBody = "";
+				using (var sreader = new StreamReader(Request.Body, Encoding.UTF8)) {
+					rawBody = await sreader.ReadToEndAsync();
+				}
+				var VM = Newtonsoft.Json.JsonConvert.DeserializeObject(rawBody, VMStrategy[typeof(T)]) as BaseViewModel<T>;
+				await Repo.Create(VM.Model);
 				await Repo.Commit();
-				return Created(model.Id.ToString(),model);
+				return Created(VM.Model.Id.ToString(), VM);
 			}
 			catch (Exception ex)
 			{
 				Repo.RollbackChanges();
-				return StatusCode(StatusCodes.Status500InternalServerError,ex);
+				return StatusCode(StatusCodes.Status500InternalServerError, new { Error = ex.GetType().Name, Message = ex.Message });
 			}
 		}
 		
-		[HttpPut]
-		public virtual async Task<ActionResult<T>> Put([FromBody]T model)
+		[HttpPut("{Id}")]
+		public virtual async Task<ActionResult<T>> Put(int Id)
 		{
 			try
 			{
-				await Repo.Create(model);
+				var rawBody = "";
+				using (var sreader = new StreamReader(Request.Body, Encoding.UTF8))
+				{
+					rawBody = await sreader.ReadToEndAsync();
+				}
+
+				var VM = Newtonsoft.Json.JsonConvert.DeserializeObject(rawBody, VMStrategy[typeof(T)]) as BaseViewModel<T>;
+				VM.Model.Id = Id; 
+				Repo.Update(VM.Model);
 				await Repo.Commit();
-				return Ok(model);
+				return Ok(VM);
 			}
 			catch (Exception ex)
 			{
 				Repo.RollbackChanges();
-				return StatusCode(StatusCodes.Status500InternalServerError,ex);
+				return StatusCode(StatusCodes.Status500InternalServerError, new { Error = ex.GetType().Name, Message = ex.Message });
 			}
 		}
 
@@ -90,7 +119,7 @@ namespace KJK.Server.Controllers
 			catch (Exception ex)
 			{
 				Repo.RollbackChanges();
-				return StatusCode(StatusCodes.Status500InternalServerError,ex);
+				return StatusCode(StatusCodes.Status500InternalServerError, new { Error = ex.GetType().Name, Message = ex.Message });
 			}
 		}
 
