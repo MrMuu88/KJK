@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KJK.Server.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class MonsterController : BaseController<Monster>
-    {
-        public MonsterController(IRepository<Monster> repo):base(repo) { }
-    }
+	[Route("api/[controller]")]
+	[ApiController]
+	public class MonsterController : BaseController<Monster>
+	{
+		public MonsterController(IRepository<Monster> repo):base(repo) { }
+	}
 }
