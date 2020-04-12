@@ -22,11 +22,11 @@
   <ItemGroup>
     <Folder Include="Integraiton\" />
     <Folder Include="Unit\" />
-    <Folder Include="Utility\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\KJK.Data\KJK.Data.csproj" />
+    <ProjectReference Include="..\KJK.Server\KJK.Server.csproj" />
   </ItemGroup>
 
 </Project>
