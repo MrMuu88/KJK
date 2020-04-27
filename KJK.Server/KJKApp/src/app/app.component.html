@@ -1,18 +1,31 @@
 
-  <nav class="navbar-brand navbar-brand-expand navbar-light bg-light">
+  <nav class="navbar navbar-expand navbar-light bg-light">
     <a class="navbar-brand">{{pageTitle}}</a>
-    <ul class="navbar-brand nav-pills">
-      <li><a class="nav-link" [routerLink]="['/Home']">home</a></li>
-      <li><a class="nav-link" [routerLink]="['/Adventures']">Adventures</a></li>
-      <li><a class="nav-link" [routerLink]="['/Characters']">Charcters</a></li>
-      <li><a class="nav-link" [routerLink]="['/Achivements']">Achievements</a></li>
-      <li><a class="nav-link" [routerLink]="['/KJKPedia']">KJKPedia</a></li>
-      <li><a class="nav-link" [routerLink]="['/Designer']">designer</a></li>
-      <li><a class="nav-link" [routerLink]="['/FAQ']">FAQ</a></li>
-      <li><a class="nav-link" [routerLink]="['/Login']">Login</a></li>
-      <li><a class="nav-link" [routerLink]="['/Register']">Register</a></li>
-      <li><a class="nav-link" [routerLink]="['/About']">About</a></li>
-    </ul>
+    <a class="nav-link" [routerLink]="['/Home']">home</a>
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" ngbDropdownToggle>Help</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button ngbDropdownItem [routerLink]="['/KJKPedia']">KJKPedia</button>
+        <button ngbDropdownItem [routerLink]="['/FAQ']">FAQ</button>
+        <button ngbDropdownItem [routerLink]="['/About']">About</button>
+      </div>
+    </div>
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" ngbDropdownToggle>My Profile</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button ngbDropdownItem>User Profile</button>
+        <button ngbDropdownItem [routerLink]="['/Adventures']">Adventures</button>
+        <button ngbDropdownItem [routerLink]="['/Characters']">Charcters</button>
+        <button ngbDropdownItem [routerLink]="['/Achivements']">Achievements</button>
+      </div>
+    </div>
+    <a class="nav-link" [routerLink]="['/Designer']">designer</a>
+    <div ngbDropdown class="d-inline-block">
+      <button class=" btn btn-outline-primary" ngbDropdownToggle>Login/register</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownForm1" class="dropdown-menu  dropdown-menu-right">
+        <login></login>
+      </div>
+    </div>
   </nav>
   <div class="container">
     <router-outlet></router-outlet>
