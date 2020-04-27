@@ -2,7 +2,6 @@ using KJK.Data;
 using KJK.Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,7 +26,7 @@ namespace KJK.Server
 			// In production, the Angular files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
 			{
-				configuration.RootPath = "ClientApp/dist";
+				configuration.RootPath = "KJKApp/dist";
 			});
 
 			services.AddDbContext<KJKDbContext>(options=> options.UseSqlServer(Configuration.GetConnectionString("KJKDB")));
@@ -71,7 +70,7 @@ namespace KJK.Server
 				// To learn more about options for serving an Angular SPA from ASP.NET Core,
 				// see https://go.microsoft.com/fwlink/?linkid=864501
 
-				spa.Options.SourcePath = "ClientApp";
+				spa.Options.SourcePath = "KJKApp";
 
 				if (env.IsDevelopment())
 				{

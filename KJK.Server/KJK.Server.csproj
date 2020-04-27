@@ -5,7 +5,7 @@
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
-    <SpaRoot>ClientApp\</SpaRoot>
+    <SpaRoot>KJKApp\</SpaRoot>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
 
     <!-- Set this to true if you enable server-side prerendering -->
@@ -31,11 +31,50 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\Controllers\" />
+    <None Remove="KJKApp\src\app\About\about.component.ts" />
+    <None Remove="KJKApp\src\app\About\faq.component.ts" />
+    <None Remove="KJKApp\src\app\About\login.component.ts" />
+    <None Remove="KJKApp\src\app\About\register.component.ts" />
+    <None Remove="KJKApp\src\app\Designer\designer.component.ts" />
+    <None Remove="KJKApp\src\app\Game\adventures.component.ts" />
+    <None Remove="KJKApp\src\app\home.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="KJKApp\Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="KJKApp\angular.json" />
+    <None Include="KJKApp\e2e\tsconfig.e2e.json" />
+    <None Include="KJKApp\package-lock.json" />
+    <None Include="KJKApp\package.json" />
+    <None Include="KJKApp\src\tsconfig.app.json" />
+    <None Include="KJKApp\src\tsconfig.server.json" />
+    <None Include="KJKApp\src\tsconfig.spec.json" />
+    <None Include="KJKApp\src\tslint.json" />
+    <None Include="KJKApp\tsconfig.json" />
+    <None Include="KJKApp\tslint.json" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\KJK.Data\KJK.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="KJKApp\src\app\About\register.component.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="KJKApp\src\app\About\about.component.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="KJKApp\src\app\About\login.component.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="KJKApp\src\app\About\faq.component.ts" />
+    <TypeScriptCompile Include="KJKApp\src\app\Designer\designer.component.ts" />
+    <TypeScriptCompile Include="KJKApp\src\app\Game\adventures.component.ts" />
+    <TypeScriptCompile Include="KJKApp\src\app\home.component.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
