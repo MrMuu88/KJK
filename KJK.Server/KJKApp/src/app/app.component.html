@@ -1,7 +1,9 @@
 
   <nav class="navbar navbar-expand navbar-light bg-light">
     <a class="navbar-brand">{{pageTitle}}</a>
-    <a class="nav-link" [routerLink]="['/Home']">home</a>
+    <button class=" btn btn-outline-primary" [routerLink]="['/Home']">home</button>
+    <button class="btn btn-outline-primary" [routerLink]="['/Designer']">designer</button>
+
     <div ngbDropdown class="d-inline-block">
       <button class="btn btn-outline-primary" ngbDropdownToggle>Help</button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
@@ -10,7 +12,8 @@
         <button ngbDropdownItem [routerLink]="['/About']">About</button>
       </div>
     </div>
-    <div ngbDropdown class="d-inline-block">
+
+    <div ngbDropdown class="d-inline-block ml-auto">
       <button class="btn btn-outline-primary" ngbDropdownToggle>My Profile</button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
         <button ngbDropdownItem>User Profile</button>
@@ -19,9 +22,10 @@
         <button ngbDropdownItem [routerLink]="['/Achivements']">Achievements</button>
       </div>
     </div>
-    <a class="nav-link" [routerLink]="['/Designer']">designer</a>
-    <div ngbDropdown class="d-inline-block">
-      <button class=" btn btn-outline-primary" ngbDropdownToggle>Login/register</button>
+
+
+    <div ngbDropdown class="d-inline-block ml-0">
+      <button class=" btn btn-outline-primary" ngbDropdownToggle>Login/Register</button>
       <div ngbDropdownMenu aria-labelledby="dropdownForm1" class="dropdown-menu  dropdown-menu-right">
         <login></login>
       </div>
@@ -30,3 +34,4 @@
   <div class="container">
     <router-outlet></router-outlet>
   </div>
+
