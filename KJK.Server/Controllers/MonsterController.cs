@@ -1,5 +1,6 @@
 ﻿using KJK.Data;
 using KJK.Data.Models;
+using KJK.Server.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KJK.Server.Controllers
@@ -8,6 +9,8 @@ namespace KJK.Server.Controllers
 	[ApiController]
 	public class MonsterController : BaseController<Monster>
 	{
-		public MonsterController(IRepository<Monster> repo):base(repo) { }
+		public MonsterController(IRepository<Monster> repo):base(repo) {
+			VMType = typeof(MonsterViewModel);
+		}
 	}
 }

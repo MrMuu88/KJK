@@ -14,11 +14,7 @@ namespace KJK.Server.Controllers
 {
 	public abstract class BaseController<T> : ControllerBase where T:BaseModel
 	{
-		protected static Dictionary<Type, Type> VMStrategy = new Dictionary<Type, Type>() {
-			{ typeof(Paragraph),typeof(ParagraphViewModel)},
-			{ typeof(Monster),typeof(MonsterViewModel)},
-			{ typeof(Item),typeof(ItemViewModel)}
-		};
+		protected Type VMType { get; set; }
 
 		internal IRepository<T> Repo { get; set; }
 
@@ -30,7 +26,7 @@ namespace KJK.Server.Controllers
 				
 				var items = await Repo.GetAll();
 				return Ok(
-					items.Select(i => Activator.CreateInstance(VMStrategy[typeof(T)], i))
+					items.Select(i => Activator.CreateInstance(VMType, i))
 					.ToList()
 				);
 			}
@@ -48,7 +44,7 @@ namespace KJK.Server.Controllers
 				var item = await Repo.GetById(id);
 				if (item != null)
 					return Ok(
-						Activator.CreateInstance(VMStrategy[typeof(T)],item)
+						Activator.CreateInstance(VMType,item)
 					);
 				else
 					return NotFound();
@@ -70,7 +66,7 @@ namespace KJK.Server.Controllers
 				using (var sreader = new StreamReader(Request.Body, Encoding.UTF8)) {
 					rawBody = await sreader.ReadToEndAsync();
 				}
-				var VM = Newtonsoft.Json.JsonConvert.DeserializeObject(rawBody, VMStrategy[typeof(T)]) as BaseViewModel<T>;
+				var VM = Newtonsoft.Json.JsonConvert.DeserializeObject(rawBody,VMType) as BaseViewModel<T>;
 				await Repo.Create(VM.Model);
 				await Repo.Commit();
 				return Created(VM.Model.Id.ToString(), VM);
@@ -93,7 +89,7 @@ namespace KJK.Server.Controllers
 					rawBody = await sreader.ReadToEndAsync();
 				}
 
-				var VM = Newtonsoft.Json.JsonConvert.DeserializeObject(rawBody, VMStrategy[typeof(T)]) as BaseViewModel<T>;
+				var VM = Newtonsoft.Json.JsonConvert.DeserializeObject(rawBody,VMType) as BaseViewModel<T>;
 				VM.Model.Id = Id; 
 				Repo.Update(VM.Model);
 				await Repo.Commit();
