@@ -31,11 +31,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="KJKApp\src\app\About\about.component.ts" />
-    <None Remove="KJKApp\src\app\About\faq.component.ts" />
-    <None Remove="KJKApp\src\app\About\forgotPassword.component.ts" />
-    <None Remove="KJKApp\src\app\About\login.component.ts" />
-    <None Remove="KJKApp\src\app\About\register.component.ts" />
+    <None Remove="KJKApp\src\app\Misc\about.component.ts" />
+    <None Remove="KJKApp\src\app\Misc\faq.component.ts" />
+    <None Remove="KJKApp\src\app\Misc\forgotPassword.component.ts" />
+    <None Remove="KJKApp\src\app\Misc\login.component.ts" />
+    <None Remove="KJKApp\src\app\Misc\register.component.ts" />
     <None Remove="KJKApp\src\app\Designer\designer.component.ts" />
     <None Remove="KJKApp\src\app\Game\adventures.component.ts" />
     <None Remove="KJKApp\src\app\home.component.ts" />
@@ -63,17 +63,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="KJKApp\src\app\About\forgotPassword.component.ts" />
-    <TypeScriptCompile Include="KJKApp\src\app\About\register.component.ts">
+    <TypeScriptCompile Include="KJKApp\src\app\Misc\forgotPassword.component.ts" />
+    <TypeScriptCompile Include="KJKApp\src\app\Misc\register.component.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="KJKApp\src\app\About\about.component.ts">
+    <TypeScriptCompile Include="KJKApp\src\app\Misc\about.component.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="KJKApp\src\app\About\login.component.ts">
+    <TypeScriptCompile Include="KJKApp\src\app\Misc\login.component.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="KJKApp\src\app\About\faq.component.ts" />
+    <TypeScriptCompile Include="KJKApp\src\app\Misc\faq.component.ts" />
     <TypeScriptCompile Include="KJKApp\src\app\Designer\designer.component.ts" />
     <TypeScriptCompile Include="KJKApp\src\app\Game\adventures.component.ts" />
     <TypeScriptCompile Include="KJKApp\src\app\home.component.ts" />
