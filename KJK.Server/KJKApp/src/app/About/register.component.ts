@@ -9,7 +9,8 @@ export class RegisterComponent {
   pageTitle: string = "Register";
   constructor(public activeModal: NgbActiveModal) { }
 
-  closeModal() {
-    this.activeModal.close('Modal closed');
+  registerNewUser(): void {
+    console.log("registering new user");
+    this.activeModal.close("User registered");
   }
 }

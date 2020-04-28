@@ -13,6 +13,6 @@
   </div>
   <button type="submit" class="btn btn-primary">Login</button>
   <div class="dropdown-divider"></div>
-  <button ngbDropdownItem>Forgot Password?</button>
-  <button ngbDropdownItem (click)="openRegisterModal()">Register</button>
+  <button ngbDropdownItem (click)="openModal('forgot')">Forgot Password?</button>
+  <button ngbDropdownItem (click)="openModal('register')">Register</button>
 </form>

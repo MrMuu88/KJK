@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RegisterComponent } from "./register.component";
+import { ForgotPasswordComponent } from "./forgotPassword.component";
+
 
 @Component({
   selector: 'login',
@@ -11,8 +13,16 @@ export class LoginComponent {
 
   constructor(private modalService: NgbModal) { }
 
-  openRegisterModal() {
-    const modalRef = this.modalService.open(RegisterComponent);
+  openModal(request: string) {
+    var modalRef: any;
+
+    if (request == 'forgot') {
+      modalRef = this.modalService.open(ForgotPasswordComponent);
+    }
+    else if (request == 'register') {
+      modalRef = this.modalService.open(RegisterComponent);
+    }
+
     modalRef.result.then(
       (result) => {
         console.log(result);

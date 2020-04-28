@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -15,6 +15,7 @@ import { DesignerComponent } from './Designer/designer.component';
 import { FaqComponent } from './About/faq.component';
 import { LoginComponent } from './About/login.component';
 import { RegisterComponent } from './About/register.component';
+import { ForgotPasswordComponent } from './About/forgotPassword.component';
 import { AboutComponent } from './About/about.component';
 
 
@@ -30,11 +31,13 @@ import { AboutComponent } from './About/about.component';
     FaqComponent,
     LoginComponent,
     RegisterComponent,
+    ForgotPasswordComponent,
     AboutComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     NgbModule,
+    NgbModalModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
@@ -45,14 +48,13 @@ import { AboutComponent } from './About/about.component';
       { path: 'KJKPedia', component: KJKPediaComponent },
       { path: 'Designer', component: DesignerComponent },
       { path: 'FAQ', component: FaqComponent },
-      { path: 'Login', component: LoginComponent },
-      { path: 'Register', component: RegisterComponent },
       { path: 'About', component: AboutComponent },
-      { path: '', redirectTo: "home", pathMatch:'full' },
-      { path: '**', redirectTo: "home", pathMatch:'full' }
+      { path: '', redirectTo: "Home", pathMatch:'full' },
+      { path: '**', redirectTo: "Home", pathMatch:'full' }
     ])
   ],
   providers: [],
+  entryComponents:[RegisterComponent,ForgotPasswordComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

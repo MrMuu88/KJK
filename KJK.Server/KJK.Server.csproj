@@ -33,6 +33,7 @@
   <ItemGroup>
     <None Remove="KJKApp\src\app\About\about.component.ts" />
     <None Remove="KJKApp\src\app\About\faq.component.ts" />
+    <None Remove="KJKApp\src\app\About\forgotPassword.component.ts" />
     <None Remove="KJKApp\src\app\About\login.component.ts" />
     <None Remove="KJKApp\src\app\About\register.component.ts" />
     <None Remove="KJKApp\src\app\Designer\designer.component.ts" />
@@ -53,7 +54,7 @@
     <None Include="KJKApp\src\tsconfig.server.json" />
     <None Include="KJKApp\src\tsconfig.spec.json" />
     <None Include="KJKApp\src\tslint.json" />
-    <None Include="KJKApp\tsconfig.json" />
+    <TypeScriptCompile Include="KJKApp\tsconfig.json" />
     <None Include="KJKApp\tslint.json" />
   </ItemGroup>
 
@@ -62,6 +63,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="KJKApp\src\app\About\forgotPassword.component.ts" />
     <TypeScriptCompile Include="KJKApp\src\app\About\register.component.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
