@@ -12,11 +12,11 @@ import { CharactersComponent } from './Game/characters.component';
 import { AchievementsComponent } from './Game/achievements.component';
 import { KJKPediaComponent } from './Game/kjkPedia.component';
 import { DesignerComponent } from './Designer/designer.component';
-import { FaqComponent } from './About/faq.component';
-import { LoginComponent } from './About/login.component';
-import { RegisterComponent } from './About/register.component';
-import { ForgotPasswordComponent } from './About/forgotPassword.component';
-import { AboutComponent } from './About/about.component';
+import { FaqComponent } from './Misc/faq.component';
+import { LoginComponent } from './Misc/login.component';
+import { RegisterComponent } from './Misc/register.component';
+import { ForgotPasswordComponent } from './Misc/forgotPassword.component';
+import { AboutComponent } from './Misc/about.component';
 
 
 @NgModule({
