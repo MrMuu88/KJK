@@ -6,6 +6,13 @@
     <ApplicationIcon />
     <StartupObject />
   </PropertyGroup>
+ 
+  <ItemGroup>
+    <Compile Remove="Migrations\20200428051116_added_user.cs" />
+    <Compile Remove="Migrations\20200428051116_added_user.Designer.cs" />
+    <Compile Remove="Migrations\20200428051430_added_user.cs" />
+    <Compile Remove="Migrations\20200428051430_added_user.Designer.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.3" />
