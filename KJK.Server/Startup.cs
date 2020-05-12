@@ -50,7 +50,9 @@ namespace KJK.Server
 				app.UseHsts();
 			}
 
+	#if !DEBUG
 			app.UseHttpsRedirection();
+	#endif
 			app.UseStaticFiles();
 			if (!env.IsDevelopment())
 			{
