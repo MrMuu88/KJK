@@ -39,10 +39,13 @@
     <None Remove="KJKApp\src\app\Designer\designer.component.ts" />
     <None Remove="KJKApp\src\app\Game\adventures.component.ts" />
     <None Remove="KJKApp\src\app\home.component.ts" />
+    <None Remove="KJKApp\src\app\models\login.model.ts" />
+    <None Remove="KJKApp\src\app\models\register.model.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="KJKApp\Controllers\" />
+    <Folder Include="KJKApp\src\app\Services\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +57,8 @@
     <None Include="KJKApp\src\tsconfig.server.json" />
     <None Include="KJKApp\src\tsconfig.spec.json" />
     <None Include="KJKApp\src\tslint.json" />
+    <TypeScriptCompile Include="KJKApp\src\app\models\login.model.ts" />
+    <TypeScriptCompile Include="KJKApp\src\app\models\register.model.ts" />
     <TypeScriptCompile Include="KJKApp\tsconfig.json" />
     <None Include="KJKApp\tslint.json" />
   </ItemGroup>

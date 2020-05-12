@@ -78,14 +78,14 @@ namespace KJK.Server.Controllers
 
 					case PasswordVerificationResult.Success:
 						//Authenticated
-						return Ok();
+						return Ok(new { message = "succesfully logged in " });
 
 					case PasswordVerificationResult.SuccessRehashNeeded:
 						var newHash = passwordHasher.HashPassword(user, loginModel.Password);
 						user.Password = newHash;
 						Repository.Update(user);
 						await Repository.Commit();
-						return Ok();
+						return Ok(new { message="succesfully logged in "});
 
 					default:
 						return StatusCode(StatusCodes.Status500InternalServerError);
