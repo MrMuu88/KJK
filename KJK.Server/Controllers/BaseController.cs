@@ -9,22 +9,27 @@ using KJK.Data.Models;
 using KJK.Server.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace KJK.Server.Controllers
 {
 	public abstract class BaseController<T> : ControllerBase where T:BaseModel
 	{
 		protected Type VMType { get; set; }
+		public KJKDbContext DbContext { get; private set; }
 
-		internal IRepository<T> Repo { get; set; }
+		public BaseController(KJKDbContext dbcontext)
+		{
+			DbContext = dbcontext;
+		}
 
 		[HttpGet]
 		public virtual async Task<ActionResult<IEnumerable<T>>> GetAll()
 		{
 			try
 			{
-				
-				var items = await Repo.GetAll();
+
+				var items = await DbContext.Set<T>().ToListAsync();
 				return Ok(
 					items.Select(i => Activator.CreateInstance(VMType, i))
 					.ToList()
@@ -41,7 +46,7 @@ namespace KJK.Server.Controllers
 		{
 			try
 			{
-				var item = await Repo.GetById(id);
+				var item = await DbContext.Set<T>().Where(i => i.Id == id).FirstOrDefaultAsync();
 				if (item != null)
 					return Ok(
 						Activator.CreateInstance(VMType,item)
@@ -67,13 +72,12 @@ namespace KJK.Server.Controllers
 					rawBody = await sreader.ReadToEndAsync();
 				}
 				var VM = Newtonsoft.Json.JsonConvert.DeserializeObject(rawBody,VMType) as BaseViewModel<T>;
-				await Repo.Create(VM.Model);
-				await Repo.Commit();
+				await DbContext.AddAsync(VM.Model);
+				await DbContext.SaveChangesAsync();
 				return Created(VM.Model.Id.ToString(), VM);
 			}
 			catch (Exception ex)
 			{
-				Repo.RollbackChanges();
 				return StatusCode(StatusCodes.Status500InternalServerError, new { Error = ex.GetType().Name, Message = ex.Message });
 			}
 		}
@@ -91,13 +95,12 @@ namespace KJK.Server.Controllers
 
 				var VM = Newtonsoft.Json.JsonConvert.DeserializeObject(rawBody,VMType) as BaseViewModel<T>;
 				VM.Model.Id = Id; 
-				Repo.Update(VM.Model);
-				await Repo.Commit();
+				DbContext.Update(VM.Model);
+				await DbContext.SaveChangesAsync();
 				return Ok(VM);
 			}
 			catch (Exception ex)
 			{
-				Repo.RollbackChanges();
 				return StatusCode(StatusCodes.Status500InternalServerError, new { Error = ex.GetType().Name, Message = ex.Message });
 			}
 		}
@@ -107,21 +110,16 @@ namespace KJK.Server.Controllers
 		{
 			try
 			{
-				var shouldDelete = await Repo.GetById(id);
-				Repo.Remove(shouldDelete);
-				await Repo.Commit();
+				var shouldDelete = await DbContext.FindAsync<T>(id);
+				DbContext.Remove(shouldDelete);
+				await DbContext.SaveChangesAsync();
 				return Ok(shouldDelete);
 			}
 			catch (Exception ex)
 			{
-				Repo.RollbackChanges();
 				return StatusCode(StatusCodes.Status500InternalServerError, new { Error = ex.GetType().Name, Message = ex.Message });
 			}
 		}
 
-		public BaseController(IRepository<T> repo)
-		{
-			Repo = repo;
-		}
 	}
 }

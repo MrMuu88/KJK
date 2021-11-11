@@ -1,0 +1,6 @@
+{
+	"Id":1,
+	"Name":"Gyógyító Ital",
+	"Text":"A Gyógyító Ital plusz 4 Életerő pontot jelent, valahányszor iszol belőle.",
+	"Script":"Player.Stamina += 4;"
+}

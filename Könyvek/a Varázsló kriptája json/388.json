@@ -1,0 +1,5 @@
+{
+"Id":388,
+"Text":"<p>Az erős méreg gyorsan hat, és érzed, amint végtagjaidmegmerevednek. Vesztesz 6 Életerő és 2Ügyesség pontot. Emberfeletti erővel sikerül lovadatmozgásra ösztökélned, és elmenekülnöd aSzigonylegyek elől. Mihelyt magad mögött tudodőket, kortyintasz egyet Yaztromo Gyógyító Italából,hogy közömbösítsd a méreg hatását. Azonnaljobban érzed magad, de nem nyersz vissza egyÉleterő pontot sem. Miután túljutottál a lápon, nyugodtanfolytatod utadat a folyó mentén, a dombokközé. Lapozz a 185-re.</p>"
+"Script": "Player.Stamina -=6; Player.Dexercity -= 2"
+}

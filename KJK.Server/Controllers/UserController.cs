@@ -8,6 +8,7 @@ using KJK.Server.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace KJK.Server.Controllers
 {
@@ -15,11 +16,11 @@ namespace KJK.Server.Controllers
 	[ApiController]
 	public class UserController : ControllerBase
 	{
-		public IRepository<User> Repository { get; internal set; }
+		public KJKDbContext DbContext { get; internal set; }
 
-		public UserController(IRepository<User> repo)
+		public UserController(KJKDbContext dbcontext)
 		{
-			Repository = repo;
+			DbContext = dbcontext;
 		}
 
 
@@ -29,7 +30,7 @@ namespace KJK.Server.Controllers
 			try
 			{
 				//Check if Email or NickName is used for another user
-				var foundUsers = await Repository.Find(u => u.Email == userModel.Email || u.NickName == userModel.NickName);
+				var foundUsers = await DbContext.Users.Where(u => u.Email == userModel.Email || u.NickName == userModel.NickName).ToListAsync();
 				if (foundUsers.Count > 0) {
 					var response = new {
 						EmailTaken = foundUsers.Any(u => u.Email == userModel.Email),
@@ -46,8 +47,8 @@ namespace KJK.Server.Controllers
 				user.Password = hashedPassword;
 
 				//TODO Save User to DB
-				await Repository.Create(user);
-				await Repository.Commit();
+				await DbContext.AddAsync(user);
+				await DbContext.SaveChangesAsync();
 				return StatusCode(StatusCodes.Status201Created);
 			}
 			catch (Exception ex)
@@ -62,7 +63,7 @@ namespace KJK.Server.Controllers
 		{
 			try
 			{
-				var foundUsers = await Repository.Find(u => u.Email == loginModel.LoginName || u.NickName == loginModel.LoginName);
+				var foundUsers = await DbContext.Users.Where(u => u.Email == loginModel.LoginName || u.NickName == loginModel.LoginName).ToListAsync();
 				if (foundUsers.Count > 1)
 					return StatusCode(StatusCodes.Status500InternalServerError);
 				if (foundUsers.Count == 0)
@@ -83,8 +84,8 @@ namespace KJK.Server.Controllers
 					case PasswordVerificationResult.SuccessRehashNeeded:
 						var newHash = passwordHasher.HashPassword(user, loginModel.Password);
 						user.Password = newHash;
-						Repository.Update(user);
-						await Repository.Commit();
+						DbContext.Update(user);
+						await DbContext.SaveChangesAsync();
 						return Ok(new { message="succesfully logged in "});
 
 					default:

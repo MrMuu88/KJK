@@ -1,0 +1,26 @@
+{
+	"Paragraph":{
+		"Id":1,
+		"Text": "this is the text of the paragraph with html tags",
+		"Choices":[ 12,34,56],
+		"LuckTest":[384,85],
+		"script":"a javascript code witch enables us to script what happens"
+		"Monsters":[1,1,2,3],
+		"Items":[1,1,2]
+		"Death":false,
+		
+	},
+	"Item":
+	{
+		"Id":1
+		"name":"",
+		"Text":"",
+		"Script":""
+	},
+	"Monster":{
+		"Id":1
+		"name": "ork",
+		"Stamina":12,
+		"Dexercity:3"
+	}
+}

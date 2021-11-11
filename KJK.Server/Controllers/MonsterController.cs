@@ -9,7 +9,7 @@ namespace KJK.Server.Controllers
 	[ApiController]
 	public class MonsterController : BaseController<Monster>
 	{
-		public MonsterController(IRepository<Monster> repo):base(repo) {
+		public MonsterController(KJKDbContext dbcontext) :base(dbcontext) {
 			VMType = typeof(MonsterViewModel);
 		}
 	}

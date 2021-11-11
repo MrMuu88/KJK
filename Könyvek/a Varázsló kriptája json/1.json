@@ -1,0 +1,11 @@
+{
+	"Id":1,
+	"Text":"<p>Rémálmodból, melyben élőholt teremtményekkardokkal rohannak rád, arra ébredsz, hogyYaztromo fogja a válladat. - Ideje, hogy felkelj, mármajdnem hajnalodik - mondja álmos hangon. Húszpercen belül kinn vagy, és lóra szállsz. Yaztromo,aki mindig derülátó a veszély küszöbén, mosolyogvanyújt át neked egy apró üvegfiolát. - GyógyítóItal - teszi hozzá. - Öt kortyra való van benne.- Jegyezd fel ezt a Kalandlapodon. A Gyógyító Italplusz 4 Életerő pontot jelent, valahányszor iszolbelőle. Jelöld, hány kortyot ittál. Ezután a vén mágusfeléd int, amint elügetsz keleti irányba, a Holdkődombok felé, hogy megkeresd az ElveszettTavat. Mikor a nap már magasan jár az égen, alátóhatáron dombok tűnnek fel fenyegetően,északról dél felé szegélyezve utadat, és azon járaz eszed, hogyan fogod valaha is megtalálni atavat. Estére már a dombok lábánál jársz, ahol azEzüstfolyó a Szélpusztán át egyenesen Kelyhesdfelé folyik. Úgy döntesz, letáborozol a folyó partján,tüzet raksz, hogy megmelegedj, és távol tartsdmagadtól az éj összes vadászó teremtményét. Azéjszaka eseménytelenül telik, s reggel éhesenébredsz. Miután elfogyasztod a hátizsákodbanlévő kenyeret és sajtot, felkászálódsz a lovad hátára,majd azon tűnődsz, melyik utat is válaszd.Ha át akarsz vágni a folyón, és kelet felé akarodfolytatni utadat a dombok közé - lapozz a 255-re.Ha inkább észak felé követed a folyót - lapozz a146-ra.</p>",
+	"Choices":[255,146],
+	"Items":[
+		{
+			"Id": 1,
+			"Amount":5
+		}
+	]
+}

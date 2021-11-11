@@ -30,10 +30,6 @@ namespace KJK.Server
 			});
 
 			services.AddDbContext<KJKDbContext>(options=> options.UseSqlServer(Configuration.GetConnectionString("KJKDB")));
-			services.AddScoped<IRepository<Paragraph>, BaseRepository<Paragraph>>();
-			services.AddScoped<IRepository<Item>, BaseRepository<Item>>();
-			services.AddScoped<IRepository<Monster>, BaseRepository<Monster>>();
-			services.AddScoped<IRepository<User>, BaseRepository<User>>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

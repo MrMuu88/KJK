@@ -1,0 +1,6 @@
+{
+"Id":346,
+"Text":"<p>Az erős méreg gyorsan hat, de szerencsére szervezetedlegyőzi ezt a kis mennyiséget. Úgy érzed,végtagjaid kissé megmerevednek, de nem bénulnakmeg. Vesztesz 4 Életerő pontot. Lovadatmegsarkantyúzod, és kardoddal vagdalkozol alevegőben, hogy távol tartsd magadtól a lebegőlegyeket, melyek csak arra várnak, hogy zsákmányukelébük hulljon. Sikerül megmenekülnöd előlük,és amint biztonságban érzed magad, megiszolegy kortyot Yaztromo Gyógyító Italából, hogy legyőzda méreg hatását. Azonnal jobban érzedmagad, de nem nyersz vissza egy Életerő pontotsem. Miután túljutottál a lápon, megkönnyebbültenfolytatod utad a dombok közé, a folyó mentén.Lapozz a 185-re.</p>",
+"Choices":[185],
+"script":"Player.Stamina -= 4"
+}

@@ -9,7 +9,7 @@ namespace KJK.Server.Controllers
 	[ApiController]
 	public class ParagraphController : BaseController<Paragraph>
 	{
-		public ParagraphController(IRepository<Paragraph> repo) : base(repo) {
+		public ParagraphController(KJKDbContext dbcontext) : base(dbcontext) {
 			VMType = typeof(ParagraphViewModel);
 		}
 	}

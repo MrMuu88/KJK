@@ -9,7 +9,7 @@ namespace KJK.Server.Controllers
 	[ApiController]
 	public class ItemController : BaseController<Item>
 	{
-		public ItemController(IRepository<Item> repo) : base(repo) {
+		public ItemController(KJKDbContext dbcontext) : base(dbcontext) {
 			VMType = typeof(ItemViewModel);
 		}
 	}
