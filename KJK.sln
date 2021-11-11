@@ -6,13 +6,10 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KJK.Data", "KJK.Data\KJK.Data.csproj", "{06DB7362-657C-4690-9993-7A4F7555280F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AF331425-58F1-46AA-A3CB-BFDC051D0BE6}"
-	ProjectSection(SolutionItems) = preProject
-		Adventure.db = Adventure.db
-	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KJK.Tests", "KJK.Tests\KJK.Tests.csproj", "{CA15A5EC-41FF-4099-8491-688FF9CB02E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KJK.Tests", "KJK.Tests\KJK.Tests.csproj", "{CA15A5EC-41FF-4099-8491-688FF9CB02E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KJK.Server", "KJK.Server\KJK.Server.csproj", "{223A13BC-08DC-4089-9018-60CC58BCAEBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KJK.Server", "KJK.Server\KJK.Server.csproj", "{223A13BC-08DC-4089-9018-60CC58BCAEBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
