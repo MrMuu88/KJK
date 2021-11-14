@@ -23,6 +23,10 @@ namespace KJK.Server.Controllers
 			DbContext = dbcontext;
 		}
 
+		/// <summary>
+		/// get a list of all entries from the database 
+		/// </summary>
+		/// <returns></returns>
 		[HttpGet]
 		public virtual async Task<ActionResult<IEnumerable<T>>> GetAll()
 		{
@@ -41,6 +45,11 @@ namespace KJK.Server.Controllers
 			}
 		}
 		
+		/// <summary>
+		/// get an entry with the provided Id from the DB
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		[HttpGet("{Id}")]
 		public virtual async Task<ActionResult<T>> GetById(int id)
 		{
@@ -61,7 +70,10 @@ namespace KJK.Server.Controllers
 			}
 		}
 
-
+		/// <summary>
+		/// create a new entry in the database
+		/// </summary>
+		/// <returns></returns>
 		[HttpPost]
 		public virtual async Task<ActionResult<T>> Post()
 		{
@@ -82,6 +94,11 @@ namespace KJK.Server.Controllers
 			}
 		}
 		
+		/// <summary>
+		/// update the entry in the database
+		/// </summary>
+		/// <param name="Id"></param>
+		/// <returns></returns>
 		[HttpPut("{Id}")]
 		public virtual async Task<ActionResult<T>> Put(int Id)
 		{
@@ -105,6 +122,11 @@ namespace KJK.Server.Controllers
 			}
 		}
 
+		/// <summary>
+		/// delete the given entry from the Database
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		[HttpDelete("{id}")]
 		public virtual async Task<ActionResult<T>> Delete(int id)
 		{
