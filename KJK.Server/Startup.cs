@@ -1,4 +1,5 @@
 using KJK.Data;
+using KJK.Server.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -43,10 +44,6 @@ namespace KJK.Server
 			{
 				app.UseDeveloperExceptionPage();
 			}
-			else
-			{
-				app.UseExceptionHandler("/Error");
-			}
 
 	#if !DEBUG
 			app.UseHttpsRedirection();
@@ -67,6 +64,9 @@ namespace KJK.Server
 			{
 				endpoints.MapControllers();
 			});
+
+			app.UseMiddleware<ExceptionMiddleware>();
+			app.UseMiddleware<LoggerMiddleware>();
 
 			app.UseSpa(spa =>
 			{
