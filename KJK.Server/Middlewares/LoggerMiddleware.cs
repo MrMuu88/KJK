@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace KJK.Server.Middlewares
@@ -18,7 +19,8 @@ namespace KJK.Server.Middlewares
 
 		public async Task InvokeAsync(HttpContext httpContext)
 		{
-			using (var scope = Logger.BeginScope(Guid.NewGuid().ToString().Substring(0, 6)))
+			var logstate = new Dictionary<string, string> { { "ThreadIdentifier", Guid.NewGuid().ToString().Substring(0, 6) } };
+			using (var scope = Logger.BeginScope(logstate))
 			{
 				await Next(httpContext);
 			}
