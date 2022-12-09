@@ -24,12 +24,12 @@ namespace KJK.Server.Controllers
     [AllowAnonymous]
     [Route("api/[controller]")]
 	[ApiController]
-	public class UserController : ControllerBase
+	public class AuthenticationController : ControllerBase
 	{
 		public KJKDbContext DbContext { get; private set; }
 		public JwtConfiguration JwtConfiguration { get; private set; }
 
-		public UserController(KJKDbContext dbcontext, IOptions<JwtConfiguration> config)
+		public AuthenticationController(KJKDbContext dbcontext, IOptions<JwtConfiguration> config)
 		{
 			DbContext = dbcontext;
 			JwtConfiguration = config.Value ?? new JwtConfiguration();
