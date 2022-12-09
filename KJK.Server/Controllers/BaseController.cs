@@ -7,17 +7,20 @@ using System.Threading.Tasks;
 using KJK.Data;
 using KJK.Data.Models;
 using KJK.Server.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace KJK.Server.Controllers
 {
-	public abstract class BaseController<T> : ControllerBase where T:BaseModel
+
+    [Authorize]
+    public abstract class BaseCRUDController<T> : ControllerBase where T:BaseModel
 	{
 		protected Type VMType { get; set; }
 		public KJKDbContext DbContext { get; private set; }
 
-		public BaseController(KJKDbContext dbcontext)
+		public BaseCRUDController(KJKDbContext dbcontext)
 		{
 			DbContext = dbcontext;
 		}

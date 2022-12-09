@@ -10,6 +10,7 @@ using KJK.Data.Models;
 using KJK.Server.Configurations;
 using KJK.Server.Models;
 using KJK.Server.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,9 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace KJK.Server.Controllers
 {
-	[Route("api/[controller]")]
+
+    [AllowAnonymous]
+    [Route("api/[controller]")]
 	[ApiController]
 	public class UserController : ControllerBase
 	{
@@ -58,7 +61,6 @@ namespace KJK.Server.Controllers
 			await DbContext.SaveChangesAsync();
 			return StatusCode(StatusCodes.Status201Created);
 		}
-
 
 		[HttpPost("Login")]
 		public async Task<ActionResult<string>> Login([FromBody]LoginModel loginModel)

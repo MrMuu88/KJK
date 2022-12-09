@@ -7,7 +7,7 @@ namespace KJK.Server.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class MonsterController : BaseController<Monster>
+	public class MonsterController : BaseCRUDController<Monster>
 	{
 		public MonsterController(KJKDbContext dbcontext) :base(dbcontext) {
 			VMType = typeof(MonsterViewModel);
