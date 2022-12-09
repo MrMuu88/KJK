@@ -77,8 +77,6 @@ namespace KJK.Server.Controllers
 					DbContext.Update(user);
 					await DbContext.SaveChangesAsync();
 					return Ok(new { message="succesfully logged in "});
-					var a = "";
-					a.Replace()
 				default:
 					return StatusCode(StatusCodes.Status500InternalServerError);
 			}
