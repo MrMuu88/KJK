@@ -1,4 +1,5 @@
 using KJK.Data;
+using KJK.Server.Configurations;
 using KJK.Server.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,8 @@ namespace KJK.Server
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "KJK Api", Version = "v1" });
 				c.IncludeXmlComments(@".\KJK.Server.xml"); 
 			});
+
+			services.Configure<JwtConfiguration>(Configuration.GetSection("JwtConfiguration"));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
