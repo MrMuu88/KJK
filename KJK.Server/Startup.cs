@@ -24,12 +24,7 @@ namespace KJK.Server
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllers();
-			// In production, the Angular files will be served from this directory
-			services.AddSpaStaticFiles(configuration =>
-			{
-				configuration.RootPath = "KJKApp/dist";
-			});
-
+			
 			services.AddDbContext<KJKDbContext>(options=> options.UseSqlServer(Configuration.GetConnectionString("KJKDB")));
 			services.AddSwaggerGen(c=> {
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "KJK Api", Version = "v1" });
@@ -48,13 +43,7 @@ namespace KJK.Server
 	#if !DEBUG
 			app.UseHttpsRedirection();
 	#endif
-			app.UseStaticFiles();
-			if (!env.IsDevelopment())
-			{
-				app.UseSpaStaticFiles();
-			}
-
-
+			
 			app.UseSwagger();
 			app.UseSwaggerUI(c=> c.SwaggerEndpoint("/swagger/v1/swagger.json", "KJK Api"));
 
@@ -67,19 +56,6 @@ namespace KJK.Server
 
 			app.UseMiddleware<ExceptionMiddleware>();
 			app.UseMiddleware<LoggerMiddleware>();
-
-			app.UseSpa(spa =>
-			{
-				// To learn more about options for serving an Angular SPA from ASP.NET Core,
-				// see https://go.microsoft.com/fwlink/?linkid=864501
-			
-				spa.Options.SourcePath = "KJKApp";
-			
-				if (env.IsDevelopment())
-				{
-					spa.UseAngularCliServer(npmScript: "start");
-				}
-			});
 			
 		}
 	}
