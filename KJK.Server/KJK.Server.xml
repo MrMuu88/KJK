@@ -4,33 +4,33 @@
         <name>KJK.Server</name>
     </assembly>
     <members>
-        <member name="M:KJK.Server.Controllers.BaseController`1.GetAll">
+        <member name="M:KJK.Server.Controllers.BaseCRUDController`1.GetAll">
             <summary>
             get a list of all entries from the database 
             </summary>
             <returns></returns>
         </member>
-        <member name="M:KJK.Server.Controllers.BaseController`1.GetById(System.Int32)">
+        <member name="M:KJK.Server.Controllers.BaseCRUDController`1.GetById(System.Int32)">
             <summary>
             get an entry with the provided Id from the DB
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:KJK.Server.Controllers.BaseController`1.Post">
+        <member name="M:KJK.Server.Controllers.BaseCRUDController`1.Post">
             <summary>
             create a new entry in the database
             </summary>
             <returns></returns>
         </member>
-        <member name="M:KJK.Server.Controllers.BaseController`1.Put(System.Int32)">
+        <member name="M:KJK.Server.Controllers.BaseCRUDController`1.Put(System.Int32)">
             <summary>
             update the entry in the database
             </summary>
             <param name="Id"></param>
             <returns></returns>
         </member>
-        <member name="M:KJK.Server.Controllers.BaseController`1.Delete(System.Int32)">
+        <member name="M:KJK.Server.Controllers.BaseCRUDController`1.Delete(System.Int32)">
             <summary>
             delete the given entry from the Database
             </summary>

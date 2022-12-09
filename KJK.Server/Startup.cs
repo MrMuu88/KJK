@@ -17,7 +17,27 @@ namespace KJK.Server
 {
 	public class Startup
 	{
-		public Startup(IConfiguration configuration)
+		private static OpenApiSecurityScheme SecurityScheme = new OpenApiSecurityScheme
+		{
+			In = ParameterLocation.Header,
+			Description = "Please enter a vaild Token",
+			Name = "Authorization",
+			Type = SecuritySchemeType.Http,
+			BearerFormat = "JWT",
+			Scheme = "Bearer"
+		};
+
+		private static OpenApiSecurityRequirement SecurityRequirement = new OpenApiSecurityRequirement {
+			{ new OpenApiSecurityScheme{
+				Reference = new OpenApiReference
+				{
+					Type= ReferenceType.SecurityScheme,
+					Id= "Bearer"
+				}
+			}, new string[0]}
+		};
+
+        public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
 		}
@@ -33,6 +53,10 @@ namespace KJK.Server
 			services.AddSwaggerGen(c=> {
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "KJK Api", Version = "v1" });
 				c.IncludeXmlComments(@".\KJK.Server.xml"); 
+
+				c.AddSecurityDefinition("Bearer",SecurityScheme);
+
+				c.AddSecurityRequirement(SecurityRequirement);
 			});
 
 			services.Configure<JwtConfiguration>(Configuration.GetSection("JwtConfiguration"));
@@ -86,5 +110,5 @@ namespace KJK.Server
 			app.UseMiddleware<LoggerMiddleware>();
 			
 		}
-	}
+    }
 }
