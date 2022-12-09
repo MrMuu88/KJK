@@ -1,5 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using KJK.Data;
 using KJK.Data.Models;
@@ -11,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace KJK.Server.Controllers
 {
@@ -58,30 +63,56 @@ namespace KJK.Server.Controllers
 		[HttpPost("Login")]
 		public async Task<ActionResult<string>> Login([FromBody]LoginModel loginModel)
 		{
-			var foundUsers = await DbContext.Users.Where(u => u.Email == loginModel.LoginName || u.NickName == loginModel.LoginName).ToListAsync();
+			var foundUsers = await DbContext.Users
+				.Where(u => u.Email == loginModel.LoginName || u.NickName == loginModel.LoginName)
+				.ToListAsync();
+
 			if (foundUsers.Count > 1)
 				return StatusCode(StatusCodes.Status500InternalServerError);
 			if (foundUsers.Count == 0)
-				return BadRequest("No such user or wrong Password");
+				return Unauthorized("No such user or wrong Password");
 
 			var user = foundUsers.First();
 			var passwordHasher = new PasswordHasher<User>();
 			var result = passwordHasher.VerifyHashedPassword(user, user.Password, loginModel.Password);
 
 			if(result == PasswordVerificationResult.Failed)
-				return BadRequest("No such user or wrong Password");
+				return Unauthorized("No such user or wrong Password");
 
 
             if (result == PasswordVerificationResult.SuccessRehashNeeded) { 
-					var newHash = passwordHasher.HashPassword(user, loginModel.Password);
-					user.Password = newHash;
-					DbContext.Update(user);
-					await DbContext.SaveChangesAsync();
+				var newHash = passwordHasher.HashPassword(user, loginModel.Password);
+				user.Password = newHash;
+				DbContext.Update(user);
+				await DbContext.SaveChangesAsync();
 			}
 
-			return Ok("succesfully logged in");
-			
+			var securityDescriptor = GetDescriptor(loginModel);
+            var tokenHandler = new JwtSecurityTokenHandler();
+			var token = tokenHandler.CreateToken(securityDescriptor);
+			return Ok(tokenHandler.WriteToken(token));
+
 		}
 
+		private SecurityTokenDescriptor GetDescriptor(LoginModel login) {
+			
+			var claims = new[] {
+				new Claim("Id",$"{Guid.NewGuid()}"),
+				new Claim(JwtRegisteredClaimNames.Sub,login.LoginName),
+				new Claim(JwtRegisteredClaimNames.Jti,$"{Guid.NewGuid()}")
+			};
+
+			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtConfiguration.Key));
+
+			return new SecurityTokenDescriptor
+			{
+				Subject = new ClaimsIdentity(claims),
+				Expires = DateTime.Now.AddMinutes(JwtConfiguration.TokenLifeTime),
+				Issuer = JwtConfiguration.Issuer,
+				Audience = JwtConfiguration.Audience,
+				SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature),
+			};
+		}
+			
 	}
 }
