@@ -1,13 +1,16 @@
 ﻿using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using KJK.Data;
 using KJK.Data.Models;
+using KJK.Server.Configurations;
 using KJK.Server.Models;
 using KJK.Server.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace KJK.Server.Controllers
 {
@@ -15,11 +18,13 @@ namespace KJK.Server.Controllers
 	[ApiController]
 	public class UserController : ControllerBase
 	{
-		public KJKDbContext DbContext { get; internal set; }
+		public KJKDbContext DbContext { get; private set; }
+		public JwtConfiguration JwtConfiguration { get; private set; }
 
-		public UserController(KJKDbContext dbcontext)
+		public UserController(KJKDbContext dbcontext, IOptions<JwtConfiguration> config)
 		{
 			DbContext = dbcontext;
+			JwtConfiguration = config.Value ?? new JwtConfiguration();
 		}
 
 
@@ -51,35 +56,31 @@ namespace KJK.Server.Controllers
 
 
 		[HttpPost("Login")]
-		public async Task<ActionResult> Login([FromBody]LoginModel loginModel)
+		public async Task<ActionResult<string>> Login([FromBody]LoginModel loginModel)
 		{
 			var foundUsers = await DbContext.Users.Where(u => u.Email == loginModel.LoginName || u.NickName == loginModel.LoginName).ToListAsync();
 			if (foundUsers.Count > 1)
 				return StatusCode(StatusCodes.Status500InternalServerError);
 			if (foundUsers.Count == 0)
-				return BadRequest("No such user");
+				return BadRequest("No such user or wrong Password");
 
 			var user = foundUsers.First();
 			var passwordHasher = new PasswordHasher<User>();
 			var result = passwordHasher.VerifyHashedPassword(user, user.Password, loginModel.Password);
-			switch (result)
-			{
-				case PasswordVerificationResult.Failed:
-					return BadRequest("Wrong Password");
 
-				case PasswordVerificationResult.Success:
-					//Authenticated
-					return Ok(new { message = "succesfully logged in " });
+			if(result == PasswordVerificationResult.Failed)
+				return BadRequest("No such user or wrong Password");
 
-				case PasswordVerificationResult.SuccessRehashNeeded:
+
+            if (result == PasswordVerificationResult.SuccessRehashNeeded) { 
 					var newHash = passwordHasher.HashPassword(user, loginModel.Password);
 					user.Password = newHash;
 					DbContext.Update(user);
 					await DbContext.SaveChangesAsync();
-					return Ok(new { message="succesfully logged in "});
-				default:
-					return StatusCode(StatusCodes.Status500InternalServerError);
 			}
+
+			return Ok("succesfully logged in");
+			
 		}
 
 	}

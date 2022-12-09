@@ -1,6 +1,7 @@
 using KJK.Data;
 using KJK.Server.Configurations;
 using KJK.Server.Middlewares;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -8,7 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 namespace KJK.Server
 {
@@ -33,6 +36,25 @@ namespace KJK.Server
 			});
 
 			services.Configure<JwtConfiguration>(Configuration.GetSection("JwtConfiguration"));
+
+			services.AddAuthentication(o => {
+				o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+				o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+				o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(o => {
+				o.TokenValidationParameters = new TokenValidationParameters
+				{
+					ValidIssuer = Configuration["JwtConfiguration:Issuer"],
+					ValidAudience = Configuration["JwtConfiguration:Audience"],
+					IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtConfiguration:Key"])),
+					ValidateIssuer = true,
+					ValidateAudience = true,
+					ValidateLifetime = true,
+					ValidateIssuerSigningKey = true
+                };
+			});
+
+			services.AddAuthorization();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +73,9 @@ namespace KJK.Server
 			app.UseSwaggerUI(c=> c.SwaggerEndpoint("/swagger/v1/swagger.json", "KJK Api"));
 
 			app.UseRouting();
+
+			app.UseAuthentication();
+			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
 			{
