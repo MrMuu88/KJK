@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using System;
 using System.Text;
 
 namespace KJK.Server
@@ -47,8 +49,10 @@ namespace KJK.Server
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllers();
-			
-			services.AddDbContext<KJKDbContext>(options=> options.UseSqlServer(Configuration.GetConnectionString("KJKDB")));
+
+			services.AddDbContext<KJKDbContext>(options =>
+				options.UseMySql(Configuration.GetConnectionString("KJKRaspiDB"), new MariaDbServerVersion("10.5.18"))
+			);
 			services.AddSwaggerGen(c=> {
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "KJK Api", Version = "v1" });
 				c.IncludeXmlComments(@".\KJK.Server.xml"); 
