@@ -5,6 +5,7 @@ using KJK.Server.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +31,18 @@ namespace KJK.Server.Controllers
         /// <param name="vm">the entity to create</param>
         /// <returns>the created entity</returns>
         [HttpPost]
-        public async Task<ActionResult<VM>> Create([FromBody] VM vm) {
-            M model = Mapper.Map<M>(vm);
-            DbContext.Set<M>().Add(model);
+        public async Task<ActionResult<VM>> Upsert([FromBody] VM vm) {
+            M model = await DbContext.Set<M>().FirstOrDefaultAsync(m => m.Id == vm.Id);
+            model = model ?? new M();
+            bool isAdd = model.Id == 0; 
+
+            model = Mapper.Map(vm,model);
+
+            if (isAdd)
+                DbContext.Set<M>().Add(model);
+            else 
+                DbContext.Set<M>().Update(model);
+
             await DbContext.SaveChangesAsync();
 
             vm = Mapper.Map<VM>(model);
@@ -79,23 +89,6 @@ namespace KJK.Server.Controllers
         }
 
         /// <summary>
-        /// updates, a given entity to it's new content
-        /// </summary>
-        /// <param name="id">the identifier of the entity, wich should be updated</param>
-        /// <param name="vm">the new values</param>
-        /// <returns></returns>
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, [FromBody] VM vm) {
-            var model = await DbContext.Set<M>().FirstOrDefaultAsync(m => m.Id == id);
-            if (model == null)
-                return NotFound();
-            model = Mapper.Map(vm,model);
-            await DbContext.SaveChangesAsync();
-
-            return Ok();
-        }
-
-        /// <summary>
         /// deletes entity with the given id
         /// </summary>
         /// <param name="id"></param>
@@ -104,10 +97,8 @@ namespace KJK.Server.Controllers
         public async Task<ActionResult> Delete(int id) {
             var model = new M { Id = id};
             DbContext.Remove(model);
-
+            await DbContext.SaveChangesAsync();
             return Ok();
         }
-
-        
     }
 }

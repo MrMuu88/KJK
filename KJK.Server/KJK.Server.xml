@@ -4,7 +4,7 @@
         <name>KJK.Server</name>
     </assembly>
     <members>
-        <member name="M:KJK.Server.Controllers.BaseController`2.Create(`0)">
+        <member name="M:KJK.Server.Controllers.BaseController`2.Upsert(`0)">
             <summary>
             Creates a new entity
             </summary>
@@ -30,14 +30,6 @@
             </summary>
             <param name="ids">the indentifiers of the requested entites</param>
             <returns>list of entitites</returns>
-        </member>
-        <member name="M:KJK.Server.Controllers.BaseController`2.Update(System.Int32,`0)">
-            <summary>
-            updates, a given entity to it's new content
-            </summary>
-            <param name="id">the identifier of the entity, wich should be updated</param>
-            <param name="vm">the new values</param>
-            <returns></returns>
         </member>
         <member name="M:KJK.Server.Controllers.BaseController`2.Delete(System.Int32)">
             <summary>

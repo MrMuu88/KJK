@@ -4,7 +4,6 @@ namespace KJK.Server.ViewModels
 {
 	public class ItemViewModel :BaseViewModel
 	{
-		public int Id { get; set; }
 		public string Description { get; set; }
 		public bool IsConsumable {get;set;}
 		public int MaxStack {get;set;}
