@@ -2,13 +2,13 @@
 
 namespace KJK.Server.ViewModels
 {
-	public class BaseViewModel<T> where T : BaseModel
+	public class BaseViewModel
 	{
-		internal T Model { get; set; }
+		public int Id { get; set; }
 
-		public BaseViewModel(T model)
+		public BaseViewModel()
 		{
-			Model = model;
+		
 		}
 	}
 }

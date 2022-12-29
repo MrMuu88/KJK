@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using KJK.Data;
 using KJK.Data.Models;
 using KJK.Server.Configurations;
@@ -27,24 +28,26 @@ namespace KJK.Server.Controllers
 	public class AuthenticationController : ControllerBase
 	{
 		public KJKDbContext DbContext { get; private set; }
+		public IMapper Mapper { get; }
 		public JwtConfiguration JwtConfiguration { get; private set; }
 
-		public AuthenticationController(KJKDbContext dbcontext, IOptions<JwtConfiguration> config)
+		public AuthenticationController(KJKDbContext dbcontext, IOptions<JwtConfiguration> config,IMapper mapper)
 		{
 			DbContext = dbcontext;
+			Mapper = mapper;
 			JwtConfiguration = config.Value ?? new JwtConfiguration();
 		}
 
 
 		[HttpPost("Register")]
-		public async Task<ActionResult> Register([FromBody]UserViewModel userModel)
+		public async Task<ActionResult> Register([FromBody]UserViewModel vm)
 		{
 			//Check if Email or NickName is used for another user
-			var foundUsers = await DbContext.Users.Where(u => u.Email == userModel.Email || u.NickName == userModel.NickName).ToListAsync();
+			var foundUsers = await DbContext.Users.Where(u => u.Email == vm.Email || u.NickName == vm.NickName).ToListAsync();
 			if (foundUsers.Count > 0) {
 				var response = new {
-					EmailTaken = foundUsers.Any(u => u.Email == userModel.Email),
-					NickNameTaken = foundUsers.Any(u => u.NickName == userModel.NickName)
+					EmailTaken = foundUsers.Any(u => u.Email == vm.Email),
+					NickNameTaken = foundUsers.Any(u => u.NickName == vm.NickName)
 				};
 				
 				return BadRequest(response);
@@ -52,8 +55,8 @@ namespace KJK.Server.Controllers
 
 			//hash Password
 			var passwordHasher = new PasswordHasher<User>();
-			var user = userModel.Model as User;
-			var hashedPassword = passwordHasher.HashPassword(user, userModel.Password);
+			var user = Mapper.Map<User>(vm);
+			var hashedPassword = passwordHasher.HashPassword(user, vm.Password);
 			user.Password = hashedPassword;
 
 			//TODO Save User to DB

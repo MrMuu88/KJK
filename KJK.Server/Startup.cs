@@ -1,5 +1,6 @@
 using KJK.Data;
 using KJK.Server.Configurations;
+using KJK.Server.Mapping;
 using KJK.Server.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -82,6 +83,7 @@ namespace KJK.Server
 			});
 
 			services.AddAuthorization();
+			services.AddAutoMapper(c => c.AddProfile(new MappingProfile()));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

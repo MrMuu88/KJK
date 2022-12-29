@@ -3,15 +3,12 @@ using System.Collections.Generic;
 
 namespace KJK.Server.ViewModels
 {
-	public class ParagraphViewModel:BaseViewModel<Paragraph>
+	public class ParagraphViewModel:BaseViewModel
 	{
 
-		public int Id { get => Model.Id; internal set => Model.Id = value; }
-		public string Text { get => Model.Text; set => Model.Text = value; }
-		public ICollection<Choice> Choices { get => Model.Choices; set => Model.Choices = value; }
+		public int Id { get; set; }
+		public string Text {get;set;}
+		public ICollection<Choice> Choices {get;set;}
 
-		public ParagraphViewModel():this(new Paragraph()) { }
-		public ParagraphViewModel(Paragraph model) : base(model) { }
-
-}
+	}
 }

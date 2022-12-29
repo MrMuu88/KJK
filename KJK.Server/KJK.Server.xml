@@ -4,35 +4,44 @@
         <name>KJK.Server</name>
     </assembly>
     <members>
-        <member name="M:KJK.Server.Controllers.BaseCRUDController`1.GetAll">
+        <member name="M:KJK.Server.Controllers.BaseController`2.Create(`0)">
             <summary>
-            get a list of all entries from the database 
+            Creates a new entity
             </summary>
+            <param name="vm">the entity to create</param>
+            <returns>the created entity</returns>
+        </member>
+        <member name="M:KJK.Server.Controllers.BaseController`2.Read">
+            <summary>
+            get the id list of the existing entities
+            </summary>
+            <returns>an array of ids</returns>
+        </member>
+        <member name="M:KJK.Server.Controllers.BaseController`2.Read(System.Int32)">
+            <summary>
+            returns the entity with the given id
+            </summary>
+            <param name="id">entity identifier</param>
+            <returns>the entity</returns>
+        </member>
+        <member name="M:KJK.Server.Controllers.BaseController`2.ReadBatch(System.Int32[])">
+            <summary>
+            return a list of entities within the given id array
+            </summary>
+            <param name="ids">the indentifiers of the requested entites</param>
+            <returns>list of entitites</returns>
+        </member>
+        <member name="M:KJK.Server.Controllers.BaseController`2.Update(System.Int32,`0)">
+            <summary>
+            updates, a given entity to it's new content
+            </summary>
+            <param name="id">the identifier of the entity, wich should be updated</param>
+            <param name="vm">the new values</param>
             <returns></returns>
         </member>
-        <member name="M:KJK.Server.Controllers.BaseCRUDController`1.GetById(System.Int32)">
+        <member name="M:KJK.Server.Controllers.BaseController`2.Delete(System.Int32)">
             <summary>
-            get an entry with the provided Id from the DB
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:KJK.Server.Controllers.BaseCRUDController`1.Post">
-            <summary>
-            create a new entry in the database
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:KJK.Server.Controllers.BaseCRUDController`1.Put(System.Int32)">
-            <summary>
-            update the entry in the database
-            </summary>
-            <param name="Id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:KJK.Server.Controllers.BaseCRUDController`1.Delete(System.Int32)">
-            <summary>
-            delete the given entry from the Database
+            deletes entity with the given id
             </summary>
             <param name="id"></param>
             <returns></returns>
