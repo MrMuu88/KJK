@@ -31,11 +31,10 @@ namespace KJK.Server.Controllers
         /// <param name="vm">the entity to create</param>
         /// <returns>the created entity</returns>
         [HttpPost]
-        public async Task<ActionResult<VM>> Upsert([FromBody] VM vm) {
+        public virtual async Task<ActionResult<VM>> Upsert([FromBody] VM vm) {
             M model = await DbContext.Set<M>().FirstOrDefaultAsync(m => m.Id == vm.Id);
             model = model ?? new M();
             bool isAdd = model.Id == 0; 
-
             model = Mapper.Map(vm,model);
 
             if (isAdd)
@@ -54,7 +53,7 @@ namespace KJK.Server.Controllers
         /// </summary>
         /// <returns>an array of ids</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<int>>> Read() {
+        public virtual async Task<ActionResult<IEnumerable<int>>> Read() {
             var ids = await DbContext.Set<M>().Select(m => m.Id).ToListAsync();
             return Ok(ids);
         }
@@ -65,7 +64,7 @@ namespace KJK.Server.Controllers
         /// <param name="id">entity identifier</param>
         /// <returns>the entity</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<VM>> Read([FromRoute]int id) {
+        public virtual async Task<ActionResult<VM>> Read([FromRoute]int id) {
             M model = await DbContext.Set<M>().FirstOrDefaultAsync(m => m.Id == id);
             
             if(model == null) 
@@ -81,7 +80,7 @@ namespace KJK.Server.Controllers
         /// <param name="ids">the indentifiers of the requested entites</param>
         /// <returns>list of entitites</returns>
         [HttpPost("GetBatch")]
-        public async Task<ActionResult<List<VM>>> ReadBatch([FromBody]int[] ids) {
+        public virtual async Task<ActionResult<List<VM>>> ReadBatch([FromBody]int[] ids) {
             List<M> models = await DbContext.Set<M>().Where(m=> ids.Contains(m.Id)).ToListAsync();
             List<VM> vms = Mapper.Map<List<VM>>(models);
 
@@ -94,7 +93,7 @@ namespace KJK.Server.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<ActionResult> Delete(int id) {
+        public virtual async Task<ActionResult> Delete(int id) {
             var model = new M { Id = id};
             DbContext.Remove(model);
             await DbContext.SaveChangesAsync();
