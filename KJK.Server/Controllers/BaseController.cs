@@ -25,23 +25,11 @@ namespace KJK.Server.Controllers
             Mapper = mapper;
         }
 
-        /// <summary>
-        /// Creates a new entity
-        /// </summary>
-        /// <param name="vm">the entity to create</param>
-        /// <returns>the created entity</returns>
-        [HttpPost]
-        public virtual async Task<ActionResult<VM>> Upsert([FromBody] VM vm) {
-            M model = await DbContext.Set<M>().FirstOrDefaultAsync(m => m.Id == vm.Id);
-            model = model ?? new M();
-            bool isAdd = model.Id == 0; 
-            model = Mapper.Map(vm,model);
-
-            if (isAdd)
-                DbContext.Set<M>().Add(model);
-            else 
-                DbContext.Set<M>().Update(model);
-
+        public virtual async Task<ActionResult<VM>> Create([FromBody] VM vm)
+        {
+            vm.Id = 0; // ignore the Id in the vm
+            M model = Mapper.Map<M>(vm);
+            DbContext.Add(model);
             await DbContext.SaveChangesAsync();
 
             vm = Mapper.Map<VM>(model);
@@ -85,6 +73,24 @@ namespace KJK.Server.Controllers
             List<VM> vms = Mapper.Map<List<VM>>(models);
 
             return Ok(vms);
+        }
+
+        /// <summary>
+        /// Updates an  existing new entity
+        /// </summary>
+        /// <param name="vm">the entity to create</param>
+        /// <returns>the created entity</returns>
+        [HttpPut("{id}")]
+        public virtual async Task<ActionResult<VM>> Update([FromBody] VM vm,[FromQuery]int id) {
+            vm.Id = id; // Ignore the Id value in the VM
+            M model = await DbContext.Set<M>().FirstOrDefaultAsync(m => m.Id == id);
+            if (model == null) return NotFound();
+            model = Mapper.Map(vm,model);
+
+            await DbContext.SaveChangesAsync();
+
+            vm = Mapper.Map<VM>(model);
+            return Created(vm.Id.ToString(), vm);
         }
 
         /// <summary>
