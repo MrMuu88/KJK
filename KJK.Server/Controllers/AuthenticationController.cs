@@ -22,6 +22,8 @@ using Microsoft.IdentityModel.Tokens;
 namespace KJK.Server.Controllers
 {
 
+    //based on https://www.infoworld.com/article/3669188/how-to-implement-jwt-authentication-in-aspnet-core-6.html
+
     [AllowAnonymous]
     [Route("api/[controller]")]
 	[ApiController]
