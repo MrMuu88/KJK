@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { render } from "react-dom";
 import {BrowserRouter as Router,Route,Routes} from "react-router-dom";
-import Header from "./Components/Header";
+import Header from "./Components/Header/Header";
 import Menu from "./Components/Menu";
 import HomePage from "./Pages/HomePage";
 import CharacterPage from "./Pages/CharacterPage";

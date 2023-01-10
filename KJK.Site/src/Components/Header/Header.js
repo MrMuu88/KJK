@@ -3,9 +3,12 @@ import { AppBar, Box, Button, Toolbar, Typography} from "@material-ui/core";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Stack } from "@mui/system";
-import LoginPopover from "./LoginPopover";
+import LogInPopover from "./LoginPopover";
+import ProfilePopover from "./ProfilePopover";
 
 export default function Header(props){
+    const [isLoggedIn,setIsLoggedIn] = React.useState(false);
+
     return(
         <AppBar position="static">
             <Toolbar style={{display:'flex', justifyContent:'space-between'}}>
@@ -17,7 +20,9 @@ export default function Header(props){
                         KJK Site
                     </Typography>
                 </Stack>
-                <LoginPopover/>
+                {!isLoggedIn&&(<LogInPopover onLogin={()=>setIsLoggedIn(true)} onRegister={()=>console.log("register requested")}/>)}
+                {isLoggedIn&&(<ProfilePopover onLogout={()=>setIsLoggedIn(false)}/>)}
+                
             </Toolbar>
         </AppBar>
     );
