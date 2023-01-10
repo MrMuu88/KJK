@@ -25,6 +25,12 @@ namespace KJK.Server.Controllers
             Mapper = mapper;
         }
 
+        /// <summary>
+        /// Creates a new Entity in the database
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
+        [HttpPost]
         public virtual async Task<ActionResult<VM>> Create([FromBody] VM vm)
         {
             vm.Id = 0; // ignore the Id in the vm
