@@ -3,6 +3,7 @@ import { AppBar, Box, Button, Toolbar, Typography} from "@material-ui/core";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Stack } from "@mui/system";
+import LoginPopover from "./LoginPopover";
 
 export default function Header(props){
     return(
@@ -16,10 +17,7 @@ export default function Header(props){
                         KJK Site
                     </Typography>
                 </Stack>
-                <Box>
-                    <Button color="inherit" >login</Button>
-                    <Button color="inherit" >Register</Button>
-                </Box>
+                <LoginPopover/>
             </Toolbar>
         </AppBar>
     );
